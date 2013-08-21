@@ -21,6 +21,6 @@
 #define INDEPE "indepe_info"
 
 /* 分界线 */
-#define SPLIT_LINE "---------------------------------\n"
+#define SPLIT_LINE "---------------------------------"
 
 #endif

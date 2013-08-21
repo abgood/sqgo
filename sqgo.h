@@ -17,7 +17,6 @@
 #include "verify.h"
 #include "quiry.h"
 #include "aes_code.h"
-#include "define.h"
 #include "display.h"
 #include "get.h"
 

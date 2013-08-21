@@ -24,9 +24,8 @@ int main (int argc, char **argv) {
     /* get agent chinese-name */
     get_name(agent_res, agent);
 
-    // printf("%s\n", agent->site_name);
-    // printf("%s\n", agent->cn_name);
+    /* show second interface */
+    second_display(agent);
 
-    printf("ok\n");
     return 0;
 }
