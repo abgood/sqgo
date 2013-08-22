@@ -68,10 +68,9 @@ void create_link(MYSQL_ROW row, name_point agent) {
 void show_all_site_id(name_point agent) {
     int i = 1;
     site_point p = malloc(sizeof(struct site_info));
-
     p = site_head->next;
 
-    while (p != NULL) {
+    while (p) {
         printf("%3d - %s_%-15s\t(%s*%s)\n", i++, agent->site_name, p->site, agent->cn_name, p->site);
         p = p->next;
     }
@@ -79,6 +78,24 @@ void show_all_site_id(name_point agent) {
 
 /* sort site id */
 void sort_link(void) {
+    site_point p, q, s, tail;
+    tail = NULL;
+    while(site_head->next != tail) {
+        p = site_head;
+        q = p->next;
+        while(q->next != tail) {
+            if(atoi(p->next->site) > atoi(q->next->site)) {
+                s = q->next;
+                p->next = q->next;
+                q->next = q->next->next;
+                p->next->next = q;
+                q = s;
+            }
+            p = p->next;
+            q = q->next;
+        }
+        tail = q;
+    }
 }
 
 /* second show */
