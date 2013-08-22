@@ -1,6 +1,7 @@
 #include "sqgo.h"
 
 jmp_buf jmp1;
+site_point site_head;
 
 int main (int argc, char **argv) {
     MYSQL_RES *agent_res;

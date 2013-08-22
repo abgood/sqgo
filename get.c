@@ -20,7 +20,7 @@ void get_name(MYSQL_RES *res, name_point agent) {
     /* reset res point */
     mysql_data_seek(res, 0);
     while ((row = mysql_fetch_row(res))) {
-        if (strstr(line, row[1])) {
+        if (!strcmp(line, row[1])) {
             strncpy(agent->site_name, row[1], strlen(row[1]));
             strncpy(agent->cn_name, row[2], strlen(row[2]));
             break;

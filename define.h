@@ -3,7 +3,7 @@
 
 #include <mysql/mysql.h>
 
-/* 长度 */
+/* length */
 #define LEN_8 8
 #define LEN_16 16
 #define LEN_32 32
@@ -13,14 +13,17 @@
 #define LEN_512 512
 #define LEN_1024 1024
 
-/* 程序验证密码 */
+/* verify password */
 #define SQ_PAWD "love7road"
 
-/* 表名 */
+/* table name */
 #define T_NAME "name_info"
 #define INDEPE "indepe_info"
 
-/* 分界线 */
+/* split */
 #define SPLIT_LINE "---------------------------------"
+#define SEMICOLON_SPLIT ";"
+#define EQUAL_SPLIT "="
+#define MINUS_SPLIT "-"
 
 #endif
