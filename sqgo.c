@@ -2,6 +2,7 @@
 
 jmp_buf jmp1;
 site_point site_head;
+site_point site_tail;
 
 int main (int argc, char **argv) {
     MYSQL_RES *agent_res;

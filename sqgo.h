@@ -22,5 +22,6 @@
 
 extern jmp_buf jmp1;
 extern site_point site_head;
+extern site_point site_tail;
 
 #endif
