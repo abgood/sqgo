@@ -8,6 +8,7 @@
 #include <unistd.h>
 #include <ctype.h>
 #include <setjmp.h>
+#include <pcre.h>
 
 #include <openssl/aes.h>
 #include <readline/readline.h>
@@ -23,5 +24,6 @@
 extern jmp_buf jmp1;
 extern site_point site_head;
 extern site_point site_tail;
+extern int max_id;
 
 #endif

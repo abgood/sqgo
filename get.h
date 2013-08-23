@@ -21,4 +21,7 @@ typedef struct site_info {
 /* get agent chinese-name */
 void get_name(MYSQL_RES *, name_point);
 
+/* get site id */
+void get_id(void);
+
 #endif

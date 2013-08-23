@@ -24,10 +24,6 @@ MYSQL_RES *first_display(void) {
     return res;
 }
 
-/* sort link */
-// void sort_link(site_point p) {
-// }
-
 /* create site link */
 void create_link(MYSQL_ROW row, name_point agent) {
     char *field_start;
@@ -64,6 +60,44 @@ void create_link(MYSQL_ROW row, name_point agent) {
     site_tail = p;
 }
 
+/* match last site id */
+void do_pcre(char *site) {
+    pcre *re;
+    char *pattern = "\\d+$";
+    const char *error;
+    int erroffset, rc;
+    int ovector[LEN_32];
+
+    char *substring_start;
+    int substring_length;
+
+    re = pcre_compile(pattern, 0, &error, &erroffset, NULL);
+    if (re == NULL) {
+        printf("pcre compilation failed at offset %d : %s\n", erroffset, error);
+        exit(1);
+    }
+
+    rc = pcre_exec(re, NULL, site, strlen(site), 0, 0, ovector, LEN_32);
+    if(rc < 0){
+        if(rc == PCRE_ERROR_NOMATCH) {
+            printf("sorry, no match ...\n");
+        } else {
+            printf("matching error %d\n", rc);  
+            pcre_free(re);  
+            exit(1);
+        }
+    }
+
+    /*
+    substring_start = site + ovector[2 * i];
+    substring_length = ovector[2 * i + 1] - ovector[2 * i];
+    */
+    substring_start = site + ovector[0];
+    substring_length = ovector[1] - ovector[0];
+
+    max_id = atoi(substring_start);
+}
+
 /* show all site id */
 void show_all_site_id(name_point agent) {
     int i = 1;
@@ -72,6 +106,7 @@ void show_all_site_id(name_point agent) {
 
     while (p) {
         printf("%3d - %s_%-15s\t(%s*%s)\n", i++, agent->site_name, p->site, agent->cn_name, p->site);
+        do_pcre(p->site);
         p = p->next;
     }
 }
@@ -80,6 +115,7 @@ void show_all_site_id(name_point agent) {
 void sort_link(void) {
     site_point p, q, s, tail;
     tail = NULL;
+
     while(site_head->next != tail) {
         p = site_head;
         q = p->next;

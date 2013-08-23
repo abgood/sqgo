@@ -1,5 +1,6 @@
 #include "sqgo.h"
 
+/* get site name */
 void get_name(MYSQL_RES *res, name_point agent) {
     char *line;
     MYSQL_ROW row;
@@ -30,5 +31,20 @@ void get_name(MYSQL_RES *res, name_point agent) {
     if (!strlen(agent->cn_name)) {
         printf("Don\'t find any site in %s table\n\n", T_NAME);
         longjmp(jmp1, 1);
+    }
+}
+
+/* get site id */
+void get_id(void) {
+    char *line;
+
+    while (1) {
+        line = readline("please input the agent site_id: ");
+        if (atoi(line) > 0 && atoi(line) <= max_id) {
+            add_history(line);
+            break;
+        }
+
+        printf("please enter the correct id (0 < id <= %d)\n\n", max_id);
     }
 }

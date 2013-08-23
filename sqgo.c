@@ -3,6 +3,7 @@
 jmp_buf jmp1;
 site_point site_head;
 site_point site_tail;
+int max_id;
 
 int main (int argc, char **argv) {
     MYSQL_RES *agent_res;
@@ -28,6 +29,9 @@ int main (int argc, char **argv) {
 
     /* show second interface */
     second_display(agent);
+
+    /* get site id */
+    get_id();
 
     return 0;
 }
