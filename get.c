@@ -35,8 +35,14 @@ void get_name(MYSQL_RES *res, name_point agent) {
 }
 
 /* get ip info */
-void get_ip(site_point p, int input_id) {
+int get_ip(site_point p, int input_id) {
     char *id_start;
+    char id_token_start[LEN_512] = {0};
+    char id_token_end[LEN_512] = {0};
+    char id_start_tmp[LEN_512] = {0};
+    char *token;
+    int int_id_start;
+    int int_id_end;
 
     if ((id_start = strstr(p->site, MINUS_SPLIT))) {
         id_start += 1;
@@ -44,15 +50,17 @@ void get_ip(site_point p, int input_id) {
         id_start = p->site;
     }
 
+    login = (site_point)malloc(sizeof(struct site_info));
+    memset(login, '\0', sizeof(struct site_info));
+
     /* if have not "~", compare id fields */
     if (!strstr(id_start, TILDE_SPLIT)) {
         if (input_id == atoi(id_start)) {
-            output->telecom_ip = row[2];
-            output->unicom_ip = row[3];
-            output->port = atoi(row[4]);
-            output->resource = atoi(row[5]);
-            output->site_id = atoi(m_id);
-            return;
+            strcpy(login->site, p->site);
+            strcpy(login->tel_ip, p->tel_ip);
+            strcpy(login->db1_ip, p->db1_ip);
+            strcpy(login->db2_ip, p->db2_ip);
+            return 1;
         }
     } else {
         memset(id_start_tmp, '\0', LEN_512);
@@ -68,17 +76,18 @@ void get_ip(site_point p, int input_id) {
 
             /* get ip */
             if ((input_id >= int_id_start && input_id <= int_id_end) || (input_id == int_id_start)) {
-                output->telecom_ip = row[2];
-                output->unicom_ip = row[3];
-                output->port = atoi(row[4]);
-                output->resource = atoi(row[5]);
-                output->site_id = atoi(m_id);
-                return;
+                strcpy(login->site, p->site);
+                strcpy(login->tel_ip, p->tel_ip);
+                strcpy(login->db1_ip, p->db1_ip);
+                strcpy(login->db2_ip, p->db2_ip);
+                return 1;
             }
 
             token = strtok(NULL, COMMA_SPLIT);
         }
     }
+
+    return 0;
 }
 
 /* get site id */
@@ -100,7 +109,9 @@ void get_id(void) {
     /* get site id info */
     p = site_head->next;
     while (p) {
-        get_ip(p, atoi(line));
+        if (get_ip(p, atoi(line)) == 1) {
+            break;
+        }
         p = p->next;
     }
 }

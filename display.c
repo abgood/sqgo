@@ -154,7 +154,6 @@ void second_display(name_point agent) {
     memset(site_head, '\0', sizeof(struct site_info));
     memset(site_tail, '\0', sizeof(struct site_info));
     site_tail = site_head;
-    // site_head->next = site_tail;
 
     /* show all site_id */
     while ((row = mysql_fetch_row(res))) {
