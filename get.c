@@ -34,10 +34,59 @@ void get_name(MYSQL_RES *res, name_point agent) {
     }
 }
 
+/* get ip info */
+void get_ip(site_point p, int input_id) {
+    char *id_start;
+
+    if ((id_start = strstr(p->site, MINUS_SPLIT))) {
+        id_start += 1;
+    } else {
+        id_start = p->site;
+    }
+
+    /* if have not "~", compare id fields */
+    if (!strstr(id_start, TILDE_SPLIT)) {
+        if (input_id == atoi(id_start)) {
+            output->telecom_ip = row[2];
+            output->unicom_ip = row[3];
+            output->port = atoi(row[4]);
+            output->resource = atoi(row[5]);
+            output->site_id = atoi(m_id);
+            return;
+        }
+    } else {
+        memset(id_start_tmp, '\0', LEN_512);
+        strncpy(id_start_tmp, id_start, strlen(id_start));
+        token = strtok(id_start_tmp, COMMA_SPLIT);
+        while (token) {
+            memset(id_token_start, '\0', LEN_512);
+            memset(id_token_end, '\0', LEN_512);
+            sscanf(token, "%[^~]~%[^;];", id_token_start, id_token_end);
+
+            int_id_start = atoi(id_token_start);
+            int_id_end = atoi(id_token_end);
+
+            /* get ip */
+            if ((input_id >= int_id_start && input_id <= int_id_end) || (input_id == int_id_start)) {
+                output->telecom_ip = row[2];
+                output->unicom_ip = row[3];
+                output->port = atoi(row[4]);
+                output->resource = atoi(row[5]);
+                output->site_id = atoi(m_id);
+                return;
+            }
+
+            token = strtok(NULL, COMMA_SPLIT);
+        }
+    }
+}
+
 /* get site id */
 void get_id(void) {
     char *line;
+    site_point p = malloc(sizeof(struct site_info));
 
+    /* input site id */
     while (1) {
         line = readline("please input the agent site_id: ");
         if (atoi(line) > 0 && atoi(line) <= max_id) {
@@ -46,5 +95,12 @@ void get_id(void) {
         }
 
         printf("please enter the correct id (0 < id <= %d)\n\n", max_id);
+    }
+
+    /* get site id info */
+    p = site_head->next;
+    while (p) {
+        get_ip(p, atoi(line));
+        p = p->next;
     }
 }

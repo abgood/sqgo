@@ -25,5 +25,7 @@
 #define SEMICOLON_SPLIT ";"
 #define EQUAL_SPLIT "="
 #define MINUS_SPLIT "-"
+#define TILDE_SPLIT "~"
+#define COMMA_SPLIT ","
 
 #endif

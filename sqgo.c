@@ -3,6 +3,7 @@
 jmp_buf jmp1;
 site_point site_head;
 site_point site_tail;
+site_point login_site;
 int max_id;
 
 int main (int argc, char **argv) {

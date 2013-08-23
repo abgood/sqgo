@@ -24,6 +24,7 @@
 extern jmp_buf jmp1;
 extern site_point site_head;
 extern site_point site_tail;
+extern site_point login_site;
 extern int max_id;
 
 #endif
