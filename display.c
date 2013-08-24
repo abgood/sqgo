@@ -167,3 +167,10 @@ void second_display(name_point agent) {
     /* show all site id */
     show_all_site_id(agent);
 }
+
+/* server type select */
+void select_type(void) {
+    /* clear screen: set cursor position and clear screen */
+    printf("\033[1;1H\033[2J");
+    printf("sq server type select\n");
+}

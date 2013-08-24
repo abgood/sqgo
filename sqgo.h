@@ -27,5 +27,6 @@ extern site_point site_head;
 extern site_point site_tail;
 extern site_point login;
 extern int max_id;
+extern ssh_point conn;
 
 #endif

@@ -1,5 +1,7 @@
 #include "sqgo.h"
 
 void ssh(void) {
-    printf("%s %s %s %s\n", login->site, login->tel_ip, login->db1_ip, login->db2_ip);
+    /* declear ssh_info struct point for conn */
+    conn = (ssh_point)malloc(sizeof(struct ssh_info));
+    memset(conn, 0, sizeof(struct ssh_info));
 }

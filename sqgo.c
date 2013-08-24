@@ -5,6 +5,7 @@ site_point site_head;
 site_point site_tail;
 site_point login;
 int max_id;
+ssh_point conn;
 
 int main (int argc, char **argv) {
     MYSQL_RES *agent_res;
@@ -33,6 +34,9 @@ int main (int argc, char **argv) {
 
     /* get site id */
     get_id();
+    
+    /* server type select */
+    select_type();
 
     /* ssh login */
     ssh();

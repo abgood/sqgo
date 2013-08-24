@@ -7,6 +7,7 @@ LIBMYSQL = `mysql_config --libs`
 LIBSSL = -lssl
 LIBREADLINE = -lreadline -lncurses
 LIBPCRE = -lpcre
+LIBSSH=-lssh
 
 # 执行文件
 TARGET = sqgo
@@ -22,7 +23,7 @@ OBJS = $(patsubst %.c,%.o,$(SOURCES))
 
 # 生成执行文件
 $(TARGET):$(OBJS)
-	$(CC) $(OBJS) -o $@ $(LIBMYSQL) $(LIBSSL) $(LIBREADLINE) $(LIBPCRE)
+	$(CC) $(OBJS) -o $@ $(LIBMYSQL) $(LIBSSL) $(LIBREADLINE) $(LIBPCRE) $(LIBSSH)
 	chmod u+x $@
 
 # 删除.o文件和执行文件
