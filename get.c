@@ -30,7 +30,7 @@ void get_name(MYSQL_RES *res, name_point agent) {
 
     if (!strlen(agent->cn_name)) {
         printf("Don\'t find any site in %s table\n\n", T_NAME);
-        longjmp(jmp1, 1);
+        longjmp(jmp2, 1);
     }
 }
 
@@ -99,7 +99,10 @@ void get_id(void) {
     while (1) {
         line = readline("please input the agent site_id: ");
         enter_id = atoi(line);
-        if (enter_id > 0 && enter_id <= max_id) {
+        if ((enter_id > 0 && enter_id <= max_id) || !strcasecmp(line, "r")) {
+            if (!strcasecmp(line, "r")) {
+                longjmp(jmp1, 1);
+            }
             add_history(line);
             break;
         }

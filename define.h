@@ -21,7 +21,7 @@
 #define INDEPE "indepe_info"
 
 /* split */
-#define SPLIT_LINE "---------------------------------"
+#define SPLIT_LINE "--------------------------------------------------------"
 #define SEMICOLON_SPLIT ";"
 #define EQUAL_SPLIT "="
 #define MINUS_SPLIT "-"
@@ -31,6 +31,5 @@
 /* ssh options */
 #define USER "root"
 #define PORT "16333"
-// #define PORT "22"
 
 #endif

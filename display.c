@@ -88,10 +88,6 @@ void do_pcre(char *site) {
         }
     }
 
-    /*
-    substring_start = site + ovector[2 * i];
-    substring_length = ovector[2 * i + 1] - ovector[2 * i];
-    */
     substring_start = site + ovector[0];
     substring_length = ovector[1] - ovector[0];
 
@@ -104,13 +100,13 @@ void show_all_site_id(name_point agent) {
     site_point p = malloc(sizeof(struct site_info));
     p = site_head->next;
 
-    printf("%s%s\n", SPLIT_LINE, SPLIT_LINE);
+    printf("%s\n", SPLIT_LINE);
     while (p) {
         printf("%3d - %s_%-15s\t(%s*%s)\n", i++, agent->site_name, p->site, agent->cn_name, p->site);
         do_pcre(p->site);
         p = p->next;
     }
-    printf("%s%s\n", SPLIT_LINE, SPLIT_LINE);
+    printf("\n  R - Return\n%s\n", SPLIT_LINE);
 }
 
 /* sort site id */
@@ -178,13 +174,16 @@ void select_type(name_point agent) {
     printf("\033[1;1H\033[2J");
     printf("sq [ %s %d ] server select\n", agent->site_name, enter_id);
     printf("%s\n1 - DB1Server\n2 - DB2Server\n3 - WebServer\n", SPLIT_LINE);
-    printf("%s\n", SPLIT_LINE);
+    printf("\nR - Return\n%s\n", SPLIT_LINE);
 
     /* input server type */
     while (1) {
         line = readline("please enter the select server type: ");
         type_id = atoi(line);
-        if (type_id >= 1 && type_id <= 3) {
+        if ((type_id >= 1 && type_id <= 3) || !strcasecmp(line, "r")) {
+            if (!strcasecmp(line, "r")) {
+                longjmp(jmp3, 1);
+            }
             add_history(line);
             break;
         }

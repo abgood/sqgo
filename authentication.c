@@ -102,8 +102,8 @@ int authenticate_console(ssh_session session){
   int rc;
   int method;
   char *banner;
-  // char *str = "7634AAC1666E2184A80594C1E6DE76AF";
-  char *str = "AC1FB8A549DA95ED9CADD3EB962975DA";
+  char *str = "7634AAC1666E2184A80594C1E6DE76AF";
+  // char *str = "AC1FB8A549DA95ED9CADD3EB962975DA";
   char *password;
 
   /* get password */

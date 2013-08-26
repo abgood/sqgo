@@ -1,9 +1,14 @@
 #include "sqgo.h"
 
 jmp_buf jmp1;
+jmp_buf jmp2;
+jmp_buf jmp3;
+jmp_buf jmp4;
+
 site_point site_head;
 site_point site_tail;
 site_point login;
+
 int max_id;
 int enter_id;
 int type_id;
@@ -19,24 +24,27 @@ int main (int argc, char **argv) {
     }
 
     /* verify login password */
-    // verify_pawd();
+    verify_pawd();
 
     /* show first interface */
+    setjmp(jmp1);
     agent_res = first_display();
 
     /* set jmp point 1 */
-    setjmp(jmp1);
+    setjmp(jmp2);
 
     /* get agent chinese-name */
     get_name(agent_res, agent);
 
     /* show second interface */
+    setjmp(jmp3);
     second_display(agent);
 
     /* get site id */
     get_id();
     
     /* server type select */
+    setjmp(jmp4);
     select_type(agent);
 
     /* ssh login */

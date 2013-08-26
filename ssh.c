@@ -31,11 +31,6 @@ void ssh(void) {
         exit(1);
     }
 
-    /*
-    memset(ip, '\0', LEN_32);
-    strncpy(ip, "10.10.3.207", strlen("10.10.3.207"));
-    */
-
     /* ssh session create */
     if (!(session = ssh_new())) {
         fprintf(stderr, "ssh_new error\n");
@@ -90,4 +85,6 @@ void ssh(void) {
 
     /* open shell */
     shell(session);
+
+    longjmp(jmp4, 1);
 }
