@@ -4,7 +4,6 @@ jmp_buf jmp1;
 site_point site_head;
 site_point site_tail;
 site_point login;
-ssh_point conn;
 int max_id;
 int enter_id;
 int type_id;

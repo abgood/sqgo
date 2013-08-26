@@ -28,4 +28,9 @@
 #define TILDE_SPLIT "~"
 #define COMMA_SPLIT ","
 
+/* ssh options */
+#define USER "root"
+#define PORT "16333"
+// #define PORT "22"
+
 #endif

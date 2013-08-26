@@ -26,9 +26,10 @@ extern jmp_buf jmp1;
 extern site_point site_head;
 extern site_point site_tail;
 extern site_point login;
-extern ssh_point conn;
 extern int max_id;
 extern int enter_id;
 extern int type_id;
+extern struct termios terminal;
+extern int signal_delayed;
 
 #endif
