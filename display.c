@@ -104,11 +104,13 @@ void show_all_site_id(name_point agent) {
     site_point p = malloc(sizeof(struct site_info));
     p = site_head->next;
 
+    printf("%s%s\n", SPLIT_LINE, SPLIT_LINE);
     while (p) {
         printf("%3d - %s_%-15s\t(%s*%s)\n", i++, agent->site_name, p->site, agent->cn_name, p->site);
         do_pcre(p->site);
         p = p->next;
     }
+    printf("%s%s\n", SPLIT_LINE, SPLIT_LINE);
 }
 
 /* sort site id */
@@ -169,8 +171,24 @@ void second_display(name_point agent) {
 }
 
 /* server type select */
-void select_type(void) {
+void select_type(name_point agent) {
+    char *line;
+
     /* clear screen: set cursor position and clear screen */
     printf("\033[1;1H\033[2J");
-    printf("sq server type select\n");
+    printf("sq [ %s %d ] server select\n", agent->site_name, enter_id);
+    printf("%s\n1 - DB1Server\n2 - DB2Server\n3 - WebServer\n", SPLIT_LINE);
+    printf("%s\n", SPLIT_LINE);
+
+    /* input server type */
+    while (1) {
+        line = readline("please enter the select server type: ");
+        type_id = atoi(line);
+        if (type_id >= 1 && type_id <= 3) {
+            add_history(line);
+            break;
+        }
+
+        printf("please enter the correct id (1 <= id <= 3)\n\n");
+    }
 }

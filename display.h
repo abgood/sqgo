@@ -10,6 +10,6 @@ MYSQL_RES *first_display(void);
 void second_display(name_point);
 
 /* server type select */
-void select_type(void);
+void select_type(name_point);
 
 #endif

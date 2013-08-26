@@ -98,7 +98,8 @@ void get_id(void) {
     /* input site id */
     while (1) {
         line = readline("please input the agent site_id: ");
-        if (atoi(line) > 0 && atoi(line) <= max_id) {
+        enter_id = atoi(line);
+        if (enter_id > 0 && enter_id <= max_id) {
             add_history(line);
             break;
         }
@@ -109,7 +110,7 @@ void get_id(void) {
     /* get site id info */
     p = site_head->next;
     while (p) {
-        if (get_ip(p, atoi(line)) == 1) {
+        if (get_ip(p, enter_id) == 1) {
             break;
         }
         p = p->next;

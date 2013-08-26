@@ -4,8 +4,10 @@ jmp_buf jmp1;
 site_point site_head;
 site_point site_tail;
 site_point login;
-int max_id;
 ssh_point conn;
+int max_id;
+int enter_id;
+int type_id;
 
 int main (int argc, char **argv) {
     MYSQL_RES *agent_res;
@@ -36,7 +38,7 @@ int main (int argc, char **argv) {
     get_id();
     
     /* server type select */
-    select_type();
+    select_type(agent);
 
     /* ssh login */
     ssh();
