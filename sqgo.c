@@ -50,5 +50,8 @@ int main (int argc, char **argv) {
     /* ssh login */
     ssh();
 
+    /* free memory */
+    free_mem();
+
     return 0;
 }

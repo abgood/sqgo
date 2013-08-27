@@ -58,6 +58,7 @@ void create_link(MYSQL_ROW row, name_point agent) {
     /* insert node */
     site_tail->next = p;
     site_tail = p;
+    free(p);
 }
 
 /* match last site id */
@@ -107,6 +108,7 @@ void show_all_site_id(name_point agent) {
         p = p->next;
     }
     printf("\n  R - Return\n%s\n", SPLIT_LINE);
+    free(p);
 }
 
 /* sort site id */

@@ -24,4 +24,7 @@ void get_name(MYSQL_RES *, name_point);
 /* get site id */
 void get_id(void);
 
+/* free memory */
+void free_mem(void);
+
 #endif
