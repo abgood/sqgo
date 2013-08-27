@@ -125,5 +125,4 @@ void free_mem(void) {
     free(site_head);
     free(site_tail);
     free(login);
-    free(agent);
 }

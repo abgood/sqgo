@@ -51,6 +51,7 @@ int main (int argc, char **argv) {
     ssh();
 
     /* free memory */
+    free(agent);
     free_mem();
 
     return 0;

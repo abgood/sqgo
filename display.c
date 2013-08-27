@@ -58,7 +58,6 @@ void create_link(MYSQL_ROW row, name_point agent) {
     /* insert node */
     site_tail->next = p;
     site_tail = p;
-    free(p);
 }
 
 /* match last site id */
