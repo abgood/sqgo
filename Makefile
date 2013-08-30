@@ -106,7 +106,7 @@ INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = ${SHELL} $(install_sh) -c -s
 LDFLAGS = 
 LIBOBJS = 
-LIBS =  `mysql_config --libs` -lssl -lreadline -lncurses -lpcre \
+LIBS = -lssl -lssh -lreadline -lpcre -lncurses  `mysql_config --libs` -lssl -lreadline -lncurses -lpcre \
 	-lssh
 LTLIBOBJS = 
 MAKEINFO = ${SHELL} /root/code/sqgo/missing --run makeinfo

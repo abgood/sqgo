@@ -12,6 +12,16 @@ AC_PROG_AWK
 AC_PROG_CC
 
 # Checks for libraries.
+# FIXME: Replace `main' with a function in `-lncurses':
+AC_CHECK_LIB([ncurses], [main])
+# FIXME: Replace `main' with a function in `-lpcre':
+AC_CHECK_LIB([pcre], [main])
+# FIXME: Replace `main' with a function in `-lreadline':
+AC_CHECK_LIB([readline], [main])
+# FIXME: Replace `main' with a function in `-lssh':
+AC_CHECK_LIB([ssh], [main])
+# FIXME: Replace `main' with a function in `-lssl':
+AC_CHECK_LIB([ssl], [main])
 
 # Checks for header files.
 AC_HEADER_STDC

@@ -10,6 +10,21 @@
 /* Define to 1 if you have the <inttypes.h> header file. */
 #define HAVE_INTTYPES_H 1
 
+/* Define to 1 if you have the `ncurses' library (-lncurses). */
+#define HAVE_LIBNCURSES 1
+
+/* Define to 1 if you have the `pcre' library (-lpcre). */
+#define HAVE_LIBPCRE 1
+
+/* Define to 1 if you have the `readline' library (-lreadline). */
+#define HAVE_LIBREADLINE 1
+
+/* Define to 1 if you have the `ssh' library (-lssh). */
+#define HAVE_LIBSSH 1
+
+/* Define to 1 if you have the `ssl' library (-lssl). */
+#define HAVE_LIBSSL 1
+
 /* Define to 1 if your system has a GNU libc compatible `malloc' function, and
    to 0 otherwise. */
 #define HAVE_MALLOC 1

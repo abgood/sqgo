@@ -481,7 +481,7 @@ s,@DEFS@,-DHAVE_CONFIG_H,;t t
 s,@ECHO_C@,,;t t
 s,@ECHO_N@,-n,;t t
 s,@ECHO_T@,,;t t
-s,@LIBS@,,;t t
+s,@LIBS@,-lssl -lssh -lreadline -lpcre -lncurses ,;t t
 s,@INSTALL_PROGRAM@,${INSTALL},;t t
 s,@INSTALL_SCRIPT@,${INSTALL},;t t
 s,@INSTALL_DATA@,${INSTALL} -m 644,;t t
@@ -839,6 +839,11 @@ ${ac_dA}PACKAGE_STRING${ac_dB}PACKAGE_STRING${ac_dC}"sqgo 1.0"${ac_dD}
 ${ac_dA}PACKAGE_BUGREPORT${ac_dB}PACKAGE_BUGREPORT${ac_dC}"abgood@sina.com"${ac_dD}
 ${ac_dA}PACKAGE${ac_dB}PACKAGE${ac_dC}"sqgo"${ac_dD}
 ${ac_dA}VERSION${ac_dB}VERSION${ac_dC}"1.0"${ac_dD}
+${ac_dA}HAVE_LIBNCURSES${ac_dB}HAVE_LIBNCURSES${ac_dC}1${ac_dD}
+${ac_dA}HAVE_LIBPCRE${ac_dB}HAVE_LIBPCRE${ac_dC}1${ac_dD}
+${ac_dA}HAVE_LIBREADLINE${ac_dB}HAVE_LIBREADLINE${ac_dC}1${ac_dD}
+${ac_dA}HAVE_LIBSSH${ac_dB}HAVE_LIBSSH${ac_dC}1${ac_dD}
+${ac_dA}HAVE_LIBSSL${ac_dB}HAVE_LIBSSL${ac_dC}1${ac_dD}
 ${ac_dA}STDC_HEADERS${ac_dB}STDC_HEADERS${ac_dC}1${ac_dD}
 ${ac_dA}HAVE_SYS_TYPES_H${ac_dB}HAVE_SYS_TYPES_H${ac_dC}1${ac_dD}
 ${ac_dA}HAVE_SYS_STAT_H${ac_dB}HAVE_SYS_STAT_H${ac_dC}1${ac_dD}
@@ -865,11 +870,6 @@ ${ac_dA}HAVE_SYS_SOCKET_H${ac_dB}HAVE_SYS_SOCKET_H${ac_dC}1${ac_dD}
 ${ac_dA}SELECT_TYPE_ARG1${ac_dB}SELECT_TYPE_ARG1${ac_dC}int${ac_dD}
 ${ac_dA}SELECT_TYPE_ARG234${ac_dB}SELECT_TYPE_ARG234${ac_dC}(fd_set *)${ac_dD}
 ${ac_dA}SELECT_TYPE_ARG5${ac_dB}SELECT_TYPE_ARG5${ac_dC}(struct timeval *)${ac_dD}
-${ac_dA}RETSIGTYPE${ac_dB}RETSIGTYPE${ac_dC}void${ac_dD}
-${ac_dA}HAVE_GETPASS${ac_dB}HAVE_GETPASS${ac_dC}1${ac_dD}
-${ac_dA}HAVE_MEMSET${ac_dB}HAVE_MEMSET${ac_dC}1${ac_dD}
-${ac_dA}HAVE_SELECT${ac_dB}HAVE_SELECT${ac_dC}1${ac_dD}
-${ac_dA}HAVE_STRCASECMP${ac_dB}HAVE_STRCASECMP${ac_dC}1${ac_dD}
 CEOF
   sed -f $tmp/defines.sed $tmp/in >$tmp/out
   rm -f $tmp/in
@@ -879,6 +879,11 @@ CEOF
 /^[	 ]*#[	 ]*define/!b
 t clr
 : clr
+${ac_dA}RETSIGTYPE${ac_dB}RETSIGTYPE${ac_dC}void${ac_dD}
+${ac_dA}HAVE_GETPASS${ac_dB}HAVE_GETPASS${ac_dC}1${ac_dD}
+${ac_dA}HAVE_MEMSET${ac_dB}HAVE_MEMSET${ac_dC}1${ac_dD}
+${ac_dA}HAVE_SELECT${ac_dB}HAVE_SELECT${ac_dC}1${ac_dD}
+${ac_dA}HAVE_STRCASECMP${ac_dB}HAVE_STRCASECMP${ac_dC}1${ac_dD}
 ${ac_dA}HAVE_STRERROR${ac_dB}HAVE_STRERROR${ac_dC}1${ac_dD}
 ${ac_dA}HAVE_STRNCASECMP${ac_dB}HAVE_STRNCASECMP${ac_dC}1${ac_dD}
 ${ac_dA}HAVE_STRSTR${ac_dB}HAVE_STRSTR${ac_dC}1${ac_dD}
@@ -901,6 +906,11 @@ ${ac_uA}PACKAGE_STRING${ac_uB}PACKAGE_STRING${ac_uC}"sqgo 1.0"${ac_uD}
 ${ac_uA}PACKAGE_BUGREPORT${ac_uB}PACKAGE_BUGREPORT${ac_uC}"abgood@sina.com"${ac_uD}
 ${ac_uA}PACKAGE${ac_uB}PACKAGE${ac_uC}"sqgo"${ac_uD}
 ${ac_uA}VERSION${ac_uB}VERSION${ac_uC}"1.0"${ac_uD}
+${ac_uA}HAVE_LIBNCURSES${ac_uB}HAVE_LIBNCURSES${ac_uC}1${ac_uD}
+${ac_uA}HAVE_LIBPCRE${ac_uB}HAVE_LIBPCRE${ac_uC}1${ac_uD}
+${ac_uA}HAVE_LIBREADLINE${ac_uB}HAVE_LIBREADLINE${ac_uC}1${ac_uD}
+${ac_uA}HAVE_LIBSSH${ac_uB}HAVE_LIBSSH${ac_uC}1${ac_uD}
+${ac_uA}HAVE_LIBSSL${ac_uB}HAVE_LIBSSL${ac_uC}1${ac_uD}
 ${ac_uA}STDC_HEADERS${ac_uB}STDC_HEADERS${ac_uC}1${ac_uD}
 ${ac_uA}HAVE_SYS_TYPES_H${ac_uB}HAVE_SYS_TYPES_H${ac_uC}1${ac_uD}
 ${ac_uA}HAVE_SYS_STAT_H${ac_uB}HAVE_SYS_STAT_H${ac_uC}1${ac_uD}
@@ -927,11 +937,6 @@ ${ac_uA}HAVE_SYS_SOCKET_H${ac_uB}HAVE_SYS_SOCKET_H${ac_uC}1${ac_uD}
 ${ac_uA}SELECT_TYPE_ARG1${ac_uB}SELECT_TYPE_ARG1${ac_uC}int${ac_uD}
 ${ac_uA}SELECT_TYPE_ARG234${ac_uB}SELECT_TYPE_ARG234${ac_uC}(fd_set *)${ac_uD}
 ${ac_uA}SELECT_TYPE_ARG5${ac_uB}SELECT_TYPE_ARG5${ac_uC}(struct timeval *)${ac_uD}
-${ac_uA}RETSIGTYPE${ac_uB}RETSIGTYPE${ac_uC}void${ac_uD}
-${ac_uA}HAVE_GETPASS${ac_uB}HAVE_GETPASS${ac_uC}1${ac_uD}
-${ac_uA}HAVE_MEMSET${ac_uB}HAVE_MEMSET${ac_uC}1${ac_uD}
-${ac_uA}HAVE_SELECT${ac_uB}HAVE_SELECT${ac_uC}1${ac_uD}
-${ac_uA}HAVE_STRCASECMP${ac_uB}HAVE_STRCASECMP${ac_uC}1${ac_uD}
 CEOF
   sed -f $tmp/undefs.sed $tmp/in >$tmp/out
   rm -f $tmp/in
@@ -941,6 +946,11 @@ CEOF
 /^[	 ]*#[	 ]*undef/!b
 t clr
 : clr
+${ac_uA}RETSIGTYPE${ac_uB}RETSIGTYPE${ac_uC}void${ac_uD}
+${ac_uA}HAVE_GETPASS${ac_uB}HAVE_GETPASS${ac_uC}1${ac_uD}
+${ac_uA}HAVE_MEMSET${ac_uB}HAVE_MEMSET${ac_uC}1${ac_uD}
+${ac_uA}HAVE_SELECT${ac_uB}HAVE_SELECT${ac_uC}1${ac_uD}
+${ac_uA}HAVE_STRCASECMP${ac_uB}HAVE_STRCASECMP${ac_uC}1${ac_uD}
 ${ac_uA}HAVE_STRERROR${ac_uB}HAVE_STRERROR${ac_uC}1${ac_uD}
 ${ac_uA}HAVE_STRNCASECMP${ac_uB}HAVE_STRNCASECMP${ac_uC}1${ac_uD}
 ${ac_uA}HAVE_STRSTR${ac_uB}HAVE_STRSTR${ac_uC}1${ac_uD}
