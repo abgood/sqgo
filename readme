@@ -1,1 +1,14 @@
 This is ssh login client
+
+工程自动编译方法
+ 1. autoscan
+ 2. mv configure.scan configure.in
+ 3. aclocal
+ 4. autoheader
+ 5. autoconf
+ 6. touch Makefile.am
+ 7. automake --add-missing
+ 8. ./configure
+ 9. make
+10. make install
+11. make dist
