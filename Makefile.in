@@ -54,7 +54,8 @@ PROGRAMS = $(bin_PROGRAMS)
 am_sqgo_OBJECTS = aes_code.$(OBJEXT) authentication.$(OBJEXT) \
 	conn.$(OBJEXT) display.$(OBJEXT) get.$(OBJEXT) \
 	knownhosts.$(OBJEXT) loop.$(OBJEXT) quiry.$(OBJEXT) \
-	sqgo.$(OBJEXT) ssh.$(OBJEXT) verify.$(OBJEXT)
+	sqgo.$(OBJEXT) ssh.$(OBJEXT) verify.$(OBJEXT) \
+	direct_login.$(OBJEXT)
 sqgo_OBJECTS = $(am_sqgo_OBJECTS)
 sqgo_LDADD = $(LDADD)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I.
@@ -152,7 +153,7 @@ sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 AUTOMAKE_OPTIONS = foreign
-sqgo_SOURCES = aes_code.c authentication.c conn.c display.c get.c knownhosts.c loop.c quiry.c sqgo.c ssh.c verify.c aes_code.h define.h display.h get.h quiry.h sqgo.h ssh.h verify.h
+sqgo_SOURCES = aes_code.c authentication.c conn.c display.c get.c knownhosts.c loop.c quiry.c sqgo.c ssh.c verify.c aes_code.h define.h display.h get.h quiry.h sqgo.h ssh.h verify.h direct_login.c direct_login.h
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
@@ -244,6 +245,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/aes_code.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/authentication.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/conn.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/direct_login.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/display.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/get.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/knownhosts.Po@am__quote@

@@ -259,6 +259,5 @@ static void release_site_info(site_point node) {
 /* free memory */
 void free_mem(void) {
     release_site_info(site_head);
-    release_site_info(site_tail);
-    release_site_info(login);
+    free(login);
 }

@@ -63,6 +63,7 @@ int main (int argc, char **argv) {
 
     /* ssh login */
     ssh();
+    longjmp(jmp4, 1);
 
     /* free memory */
     free(agent);

@@ -85,6 +85,4 @@ void ssh(void) {
 
     /* open shell */
     shell(session);
-
-    longjmp(jmp4, 1);
 }
