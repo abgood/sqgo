@@ -33,12 +33,18 @@ void direct_login(int argc, char **argv, name_point agent) {
     /* get site info */
     get_site_info(atoi(id));
 
+    /* test login */
+    if (strlen(login->tel_ip) < 7) {
+        printf("The input site does not exist, please check!!!\n");
+        goto last;
+    }
+
     /* ssh login */
     ssh();
 
     /* free memory */
-    free(agent);
-    free_mem();
+last:  free(agent);
+       free_mem();
 
     exit(0);
 }
