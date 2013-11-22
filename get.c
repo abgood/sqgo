@@ -1,9 +1,84 @@
 #include "sqgo.h"
 
+agent_point agent_head, agent_tail;
+
+static void create_list(MYSQL_ROW row) {
+    /* new create tmp node */
+    agent_point p = (agent_point)malloc(sizeof(struct agent_info));
+    memset(p, '\0', sizeof(struct agent_info));
+
+    /* copy data */
+    strcpy(p->id, row[0]);
+    strcpy(p->site, row[1]);
+    strcpy(p->agent, row[2]);
+
+    /* insert node */
+    agent_tail->next = p;
+    agent_tail = p;
+}
+
+/* copy data to agent_info */
+static void copy_to_agent(agent_point p, name_point agent) {
+    strcpy(agent->site_name, p->site);
+    strcpy(agent->cn_name, p->agent);
+}
+
+/* second input select */
+static void second_select(name_point agent) {
+    char *line;
+    agent_point p = agent_head->next;
+
+    while ((line = readline("please input the full agent (id, site, agent): "))) {
+        if (strlen(line) >= 1) {
+            add_history(line);
+            break;
+        }
+    }
+
+    while (p) {
+        /* id */
+        if (!strcmp(line, p->id)) {
+            copy_to_agent(p, agent);
+            break;
+        }
+
+        /* site */
+        if (!strcmp(line, p->site)) {
+            copy_to_agent(p, agent);
+            break;
+        }
+
+        /* agent */
+        if (!strcmp(line, p->agent)) {
+            copy_to_agent(p, agent);
+            break;
+        }
+
+        /* next node */
+        p = p->next;
+    }
+}
+
+/* release list */
+static void release_agent_info(void) {
+    agent_point p = agent_head->next;
+
+    while (p) {
+        free(p);
+        p = p->next;
+    }
+}
+
 /* get site name */
 void get_name(MYSQL_RES *res, name_point agent) {
     char *line;
     MYSQL_ROW row;
+    int agent_num = 0;
+
+    /* init agent_info node */
+    agent_head = (agent_point)malloc(sizeof(agent_point));
+    agent_tail = agent_head;
+    agent_tail->next = NULL;
 
     /* clear struct */
     memset(agent->site_name, '\0', sizeof(agent->site_name));
@@ -11,8 +86,8 @@ void get_name(MYSQL_RES *res, name_point agent) {
 
     /* input site_name */
     while (1) {
-        line = readline("please input the agent site_name: ");
-        if (strlen(line) >= 2) {
+        line = readline("please input the agent (id, site, agent): ");
+        if (strlen(line) >= 1) {
             add_history(line);
             break;
         }
@@ -21,12 +96,40 @@ void get_name(MYSQL_RES *res, name_point agent) {
     /* reset res point */
     mysql_data_seek(res, 0);
     while ((row = mysql_fetch_row(res))) {
-        if (!strcmp(line, row[1])) {
+        /* id */
+        if (!strcmp(line, row[0])) {
             strncpy(agent->site_name, row[1], strlen(row[1]));
             strncpy(agent->cn_name, row[2], strlen(row[2]));
             break;
+        } else {
+            /* site */
+            if (strstr(row[1], line)) {
+                printf("%3s - %-8s (%-2s)\n", row[0], row[1], row[2]);
+                create_list(row);
+                agent_num++;
+                continue;
+            }
+
+            /* agent */
+            if (strstr(row[2], line)) {
+                printf("%3s - %-8s (%-2s)\n", row[0], row[1], row[2]);
+                create_list(row);
+                agent_num++;
+                continue;
+            }
         }
     }
+
+    if (agent_num != 0) {
+        if (agent_num == 1) {
+            agent_point p = agent_head->next;
+            copy_to_agent(p, agent);
+        } else {
+            second_select(agent);
+        }
+    }
+
+    release_agent_info();
 
     if (!strlen(agent->cn_name)) {
         printf("Don\'t find any site in %s table\n\n", T_NAME);

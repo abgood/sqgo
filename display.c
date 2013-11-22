@@ -25,7 +25,7 @@ MYSQL_RES *first_display(void) {
 }
 
 /* create site link */
-void create_link(MYSQL_ROW row, name_point agent) {
+static void create_link(MYSQL_ROW row, name_point agent) {
     char *field_start;
     char *field_end;
     char *id_start;

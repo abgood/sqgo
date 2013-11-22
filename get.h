@@ -9,6 +9,14 @@ typedef struct name_info {
     char cn_name[LEN_32];       /* site CN */
 } *name_point;
 
+/* agent info struct */
+typedef struct agent_info {
+    char id[LEN_8];             /* agent number */
+    char site[LEN_16];          /* site EN */
+    char agent[LEN_32];         /* site CN */
+    struct agent_info *next;    /* next node point */
+} *agent_point;
+
 /* site info struct */
 typedef struct site_info {
     char site[LEN_256];         /* site field */
