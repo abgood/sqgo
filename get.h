@@ -35,4 +35,7 @@ void get_id(void);
 /* free memory */
 void free_mem(void);
 
+/* get site info */
+void get_site_info(int);
+
 #endif

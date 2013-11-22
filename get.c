@@ -72,10 +72,12 @@ static void second_select(name_point agent) {
 /* release list */
 static void release_agent_info(void) {
     agent_point p = agent_head->next;
+    agent_point pt = NULL;
 
     while (p) {
+        pt = p->next;
         free(p);
-        p = p->next;
+        p = pt;
     }
 }
 
@@ -206,10 +208,22 @@ int get_ip(site_point p, int input_id) {
     return 0;
 }
 
+/* get site info */
+void get_site_info(int enter_id) {
+    site_point p = malloc(sizeof(struct site_info));
+
+    p = site_head->next;
+    while (p) {
+        if (get_ip(p, enter_id) == 1) {
+            break;
+        }
+        p = p->next;
+    }
+}
+
 /* get site id */
 void get_id(void) {
     char *line;
-    site_point p = malloc(sizeof(struct site_info));
 
     /* input site id */
     while (1) {
@@ -227,18 +241,24 @@ void get_id(void) {
     }
 
     /* get site id info */
-    p = site_head->next;
+    get_site_info(enter_id);
+}
+
+/* release list */
+static void release_site_info(site_point node) {
+    site_point p = node->next;
+    site_point pt = NULL;
+
     while (p) {
-        if (get_ip(p, enter_id) == 1) {
-            break;
-        }
-        p = p->next;
+        pt = p->next;
+        free(p);
+        p = pt;
     }
 }
 
 /* free memory */
 void free_mem(void) {
-    free(site_head);
-    free(site_tail);
-    free(login);
+    release_site_info(site_head);
+    release_site_info(site_tail);
+    release_site_info(login);
 }

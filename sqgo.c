@@ -24,7 +24,12 @@ int main (int argc, char **argv) {
     }
 
     /* verify login password */
-    verify_pawd();
+    // verify_pawd();
+
+    /* direct login */
+    if (argc != 1) {
+        direct_login(argc, argv, agent);
+    }
 
     /* show first interface */
     setjmp(jmp1);

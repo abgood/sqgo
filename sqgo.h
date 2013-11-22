@@ -21,6 +21,7 @@
 #include "display.h"
 #include "get.h"
 #include "ssh.h"
+#include "direct_login.h"
 
 extern jmp_buf jmp1;
 extern jmp_buf jmp2;

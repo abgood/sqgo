@@ -133,32 +133,55 @@ void sort_link(void) {
     }
 }
 
-/* second show */
-void second_display(name_point agent) {
+/* select site res */
+MYSQL_RES *select_site_res(name_point agent) {
     MYSQL_RES *res;
-    MYSQL_ROW row;
     char sql[LEN_256] = {0};
 
+    /* run sql */
     sprintf(sql, "select * from %s where site like \'%s=%%\' or site like \'%%;%s=%%\'", INDEPE, agent->site_name, agent->site_name);
     printf("%s\n", sql);
     res = quiry(sql);
+
+    return res;
+}
+
+/* alloc node memory */
+void alloc_node_mem(void) {
+    site_head = (site_point)malloc(sizeof(struct site_info));
+    site_tail = (site_point)malloc(sizeof(struct site_info));
+    memset(site_head, '\0', sizeof(struct site_info));
+    memset(site_tail, '\0', sizeof(struct site_info));
+    site_tail = site_head;
+}
+
+/* create all site list */
+void create_site_list(MYSQL_RES *res, name_point agent) {
+    MYSQL_ROW row;
+
+    while ((row = mysql_fetch_row(res))) {
+        create_link(row, agent);
+    }
+
+    site_tail->next = NULL;
+}
+
+/* second show */
+void second_display(name_point agent) {
+    MYSQL_RES *res;
+
+    /* select site name */
+    res = select_site_res(agent);
 
     /* clear screen: set cursor position and clear screen */
     printf("\033[1;1H\033[2J");
     printf("sq [ %s (%s) ] area select\n", agent->site_name, agent->cn_name);
 
     /* malloc some struct memory */
-    site_head = (site_point)malloc(sizeof(struct site_info));
-    site_tail = (site_point)malloc(sizeof(struct site_info));
-    memset(site_head, '\0', sizeof(struct site_info));
-    memset(site_tail, '\0', sizeof(struct site_info));
-    site_tail = site_head;
+    alloc_node_mem();
 
-    /* show all site_id */
-    while ((row = mysql_fetch_row(res))) {
-        create_link(row, agent);
-    }
-    site_tail->next = NULL;
+    /* create all site_id */
+    create_site_list(res, agent);
 
     /* sort site id */
     sort_link();
