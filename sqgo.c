@@ -13,6 +13,12 @@ int max_id;
 int enter_id;
 int type_id;
 
+/* handle SIGINT */
+static void sig_handler(const int sig) {
+    printf("\nSIGINT handled.\n");
+    exit(EXIT_SUCCESS);
+}
+
 int main (int argc, char **argv) {
     MYSQL_RES *agent_res;
     name_point agent;
@@ -23,8 +29,11 @@ int main (int argc, char **argv) {
         exit(1);
     }
 
+    /* handle SIGINT */
+    signal(SIGINT, sig_handler);
+
     /* verify login password */
-    // verify_pawd();
+    verify_pawd();
 
     /* direct login */
     if (argc != 1) {

@@ -140,7 +140,6 @@ MYSQL_RES *select_site_res(name_point agent) {
 
     /* run sql */
     sprintf(sql, "select * from %s where site like \'%s=%%\' or site like \'%%;%s=%%\'", INDEPE, agent->site_name, agent->site_name);
-    printf("%s\n", sql);
     res = quiry(sql);
 
     return res;
