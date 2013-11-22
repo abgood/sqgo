@@ -1,5 +1,6 @@
 #include "sqgo.h"
 
+jmp_buf jmp5;
 agent_point agent_head, agent_tail;
 
 static void create_list(MYSQL_ROW row) {
@@ -27,6 +28,7 @@ static void copy_to_agent(agent_point p, name_point agent) {
 static void second_select(name_point agent) {
     char *line;
     agent_point p = agent_head->next;
+    int flag = 0;
 
     while ((line = readline("please input the full agent (id, site, agent): "))) {
         if (strlen(line) >= 1) {
@@ -39,23 +41,31 @@ static void second_select(name_point agent) {
         /* id */
         if (!strcmp(line, p->id)) {
             copy_to_agent(p, agent);
+            flag++;
             break;
         }
 
         /* site */
         if (!strcmp(line, p->site)) {
             copy_to_agent(p, agent);
+            flag++;
             break;
         }
 
         /* agent */
         if (!strcmp(line, p->agent)) {
             copy_to_agent(p, agent);
+            flag++;
             break;
         }
 
         /* next node */
         p = p->next;
+    }
+
+    if (flag == 0) {
+        printf("\nPlease enter the full contents of the following\n");
+        longjmp(jmp5, 1);
     }
 }
 
@@ -93,6 +103,8 @@ void get_name(MYSQL_RES *res, name_point agent) {
         }
     }
 
+    setjmp(jmp5);
+    printf("%s\n", SPLIT_LINE);
     /* reset res point */
     mysql_data_seek(res, 0);
     while ((row = mysql_fetch_row(res))) {
@@ -119,6 +131,7 @@ void get_name(MYSQL_RES *res, name_point agent) {
             }
         }
     }
+    printf("%s\n", SPLIT_LINE);
 
     if (agent_num != 0) {
         if (agent_num == 1) {
