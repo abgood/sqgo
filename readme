@@ -12,3 +12,7 @@ This is ssh login client
  9. make
 10. make install
 11. make dist
+
+修复:
+    1. 模糊匹配
+    2. 直接登陆
