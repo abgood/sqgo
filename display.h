@@ -21,4 +21,10 @@ void alloc_node_mem(void);
 /* create all site list */
 void create_site_list(MYSQL_RES *, name_point);
 
+/* do pcre */
+void do_pcre(char *);
+
+/* sort site id */
+void sort_link(void);
+
 #endif

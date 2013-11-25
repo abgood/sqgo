@@ -11,7 +11,9 @@ This is ssh login client
  8. ./configure
  9. make
 10. make install
-11. make dist
+11. make dist       #产生发布软件包文件
+12. make distcheck  #生成发布软件包并对其进行测试检查，以确定发布包的正确性
+13. make distclean  #删除configure生成的文件
 
 修复:
     1. 模糊匹配
