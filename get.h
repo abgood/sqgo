@@ -38,4 +38,7 @@ void free_mem(void);
 /* get site info */
 void get_site_info(int);
 
+/* update site info */
+void update_info(void);
+
 #endif

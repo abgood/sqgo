@@ -35,6 +35,9 @@ int main (int argc, char **argv) {
     /* verify login password */
     verify_pawd();
 
+    /* update site info */
+    update_info();
+
     /* direct login */
     if (argc != 1) {
         direct_login(argc, argv, agent);

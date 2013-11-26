@@ -256,6 +256,30 @@ static void release_site_info(site_point node) {
     }
 }
 
+/* update site info */
+void update_info(void) {
+    char *line;
+    int i = 1;
+
+    while ((line = readline("Could you want to update site info [yes/no]?"))) {
+        if (!strcasecmp(line, "yes")) {
+            printf("update site info start ...\n");
+            system("./get_info > sqgo.log");
+            break;
+        }
+        if (!strcasecmp(line, "no")) {
+            break;
+        }
+        if (i++ == 3) {
+            printf("NO update info!!!\n");
+            break;
+        }
+        printf("please input yes or no!!!\n\n");
+    }
+
+    return;
+}
+
 /* free memory */
 void free_mem(void) {
     release_site_info(site_head);
