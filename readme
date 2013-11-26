@@ -18,3 +18,4 @@ This is ssh login client
 修复:
     1. 模糊匹配
     2. 直接登陆
+    3. 更新信息
