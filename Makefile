@@ -154,6 +154,7 @@ sysconfdir = ${prefix}/etc
 target_alias = 
 AUTOMAKE_OPTIONS = foreign
 sqgo_SOURCES = aes_code.c authentication.c conn.c display.c get.c knownhosts.c loop.c quiry.c sqgo.c ssh.c verify.c aes_code.h define.h display.h get.h quiry.h sqgo.h ssh.h verify.h direct_login.c direct_login.h
+EXTRA_DIST = $(top_srcdir)/scripts
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
@@ -321,6 +322,7 @@ distclean-tags:
 distdir: $(DISTFILES)
 	$(am__remove_distdir)
 	mkdir $(distdir)
+	$(mkdir_p) $(distdir)/$(top_srcdir)
 	@srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`; \
 	topsrcdirstrip=`echo "$(top_srcdir)" | sed 's|.|.|g'`; \
 	list='$(DISTFILES)'; for file in $$list; do \
