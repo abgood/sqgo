@@ -264,7 +264,7 @@ void update_info(void) {
     while ((line = readline("Could you want to update site info [yes/no]?"))) {
         if (!strcasecmp(line, "yes")) {
             printf("update site info start ...\n");
-            system("./get_info");
+            system("./get_info | tee sqgo.log");
             break;
         }
         if (!strcasecmp(line, "no")) {
