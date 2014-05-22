@@ -102,7 +102,7 @@ int authenticate_console(ssh_session session){
   int rc;
   int method;
   char *banner;
-  char *str = "AC1FB8A549DA95ED9CADD3EB962975DA";
+  char *str = "*";
   char *password;
 
   /* get password */
